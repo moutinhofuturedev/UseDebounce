@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import useDebounce from './hooks/useDebounce';
+import { Box, Heading, Input, Text } from '@chakra-ui/react';
 
 type ApiProps = {
   name: string
@@ -27,19 +28,18 @@ function App() {
   }, [debouncedQuery])
 
   return(
-    <div>
-      <input 
-        type="text"
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-      />
+    <Box mb="4rem">
+      <Box ml="1rem">
+        <Heading as="h3" my="2rem">Repositórios</Heading>
+        <Input w="16rem" placeholder="Procure o repositório" value={query} onChange={(e) => setQuery(e.target.value)} />
+      </Box>
       {
         items.length > 0 ?
-        items.map((item, index) => <li key={index}>{item}</li>)
-        :
-        <div>No results</div>
+          items.map((item, index) => <Box px="2rem" py="1rem" key={index}>{item}</Box>)
+          :
+          <Text ml="1rem" mt="1rem">No results</Text>
       }
-    </div>
+    </Box>
   )
 }
 
